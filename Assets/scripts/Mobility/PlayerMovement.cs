@@ -14,10 +14,17 @@ public class PlayerMovement : MonoBehaviour
     public class JumpSettings
     {
         public bool jumping;
+        [HideInInspector]
         public bool reachedMax;
+        [HideInInspector]
+        public bool minReached;
         public float startingHieght;
         public float maxJumpHeight;
+        [HideInInspector]
+        public float maxTarget;
         public float minJumpHieght;
+        [HideInInspector]
+        public float minTarget;
         public float jumpSpeed;
         public float fallSpeed;
         public float upRate;
@@ -30,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
     public JumpSettings jumpSettings = new JumpSettings();
 
     private bool groundedPlayer;
-    private float jumpHeight = 1.0f;
+    
     private float gravityValue = -9.81f;
     public float groundRange;
     public LayerMask groundLayers;
@@ -169,20 +176,25 @@ public class PlayerMovement : MonoBehaviour
         // Changes the height position of the player..
         if (jump)
         {
+            //initial jump
             if (GroundCheck(true) && jumpSettings.jumping == false)
             {
                 jumpSettings.jumpMoment = Time.time;
                 jumpSettings.jumpSpeed = 0;
                 jumpSettings.reachedMax = false;
+                jumpSettings.minReached = false;
                 jumpParticle.Stop();
                 jumpParticle.Play();
                 groundedPlayer = false;
                 jumpSettings.jumping = true;
                 jumpSettings.startingHieght = transform.position.y;
+                jumpSettings.minTarget = jumpSettings.startingHieght + jumpSettings.minJumpHieght;
+                jumpSettings.maxTarget = jumpSettings.startingHieght + jumpSettings.maxJumpHeight;
                 jumpSettings.jumpSpeed = Mathf.Lerp(jumpSettings.jumpSpeed, jumpSettings.upMax, jumpSettings.upRate);
                 playerVelocity.y = 0f;
                 playerVelocity.y += jumpSettings.jumpSpeed;// Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
             }
+            //continue jump
             else if(transform.position.y < jumpSettings.startingHieght + jumpSettings.maxJumpHeight && !jumpSettings.reachedMax && jumpSettings.jumping == true)
             {
                 jumpSettings.jumpSpeed = Mathf.Lerp(jumpSettings.jumpSpeed, jumpSettings.upMax, jumpSettings.upRate);
@@ -191,12 +203,25 @@ public class PlayerMovement : MonoBehaviour
             }
 
         }
+
+        if(transform.position.y > jumpSettings.minTarget && !jumpSettings.minReached)
+        {
+            jumpSettings.minReached = true;
+        }
+        if (transform.position.y > jumpSettings.maxTarget && !jumpSettings.reachedMax)
+        {
+            jumpSettings.reachedMax = true;
+        }
+
+        //manage jump once controls are released.
         if (jumpSettings.jumping && !jumpSettings.reachedMax)
         {
+            //rise to max jump
             if(transform.position.y > jumpSettings.startingHieght + jumpSettings.maxJumpHeight)
             {
                 jumpSettings.reachedMax = true;
             }
+            //handle minjump if key is released.
             if(!jump && transform.position.y >= jumpSettings.startingHieght + jumpSettings.minJumpHieght) jumpSettings.reachedMax = true;
             else if(transform.position.y >= jumpSettings.startingHieght + jumpSettings.minJumpHieght)
             {
@@ -205,6 +230,7 @@ public class PlayerMovement : MonoBehaviour
                 playerVelocity.y += jumpSettings.jumpSpeed;// Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
             }
         }
+        //apply downward force
         else if(jumpSettings.jumping && jumpSettings.reachedMax && jumpSettings.downRate < jumpSettings.downMax)
         {
             jumpSettings.jumpSpeed = Mathf.Lerp(jumpSettings.jumpSpeed, jumpSettings.downMax, jumpSettings.downRate);
@@ -221,6 +247,8 @@ public class PlayerMovement : MonoBehaviour
     }
     public bool GroundCheck(bool jump = false)
     {
+        if (jumpSettings.jumping && !jumpSettings.minReached)
+            return false;
         if (jump)
         {
             if (Physics.CheckSphere(transform.position + physSettings.groundCheckPosition, physSettings.groundCheckRadius, groundLayers))
@@ -250,6 +278,7 @@ public class PlayerMovement : MonoBehaviour
                 {
                     model.transform.localPosition = Vector3.up * 0.5f;
                 }
+                
                 jumpSettings.jumping = false;
                 jumpSettings.jumpSpeed = 0f;
                 return true;
