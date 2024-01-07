@@ -179,20 +179,7 @@ public class PlayerMovement : MonoBehaviour
             //initial jump
             if (GroundCheck(true) && jumpSettings.jumping == false)
             {
-                jumpSettings.jumpMoment = Time.time;
-                jumpSettings.jumpSpeed = 0;
-                jumpSettings.reachedMax = false;
-                jumpSettings.minReached = false;
-                jumpParticle.Stop();
-                jumpParticle.Play();
-                groundedPlayer = false;
-                jumpSettings.jumping = true;
-                jumpSettings.startingHieght = transform.position.y;
-                jumpSettings.minTarget = jumpSettings.startingHieght + jumpSettings.minJumpHieght;
-                jumpSettings.maxTarget = jumpSettings.startingHieght + jumpSettings.maxJumpHeight;
-                jumpSettings.jumpSpeed = Mathf.Lerp(jumpSettings.jumpSpeed, jumpSettings.upMax, jumpSettings.upRate);
-                playerVelocity.y = 0f;
-                playerVelocity.y += jumpSettings.jumpSpeed;// Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
+                StartJump();
             }
             //continue jump
             else if(transform.position.y < jumpSettings.startingHieght + jumpSettings.maxJumpHeight && !jumpSettings.reachedMax && jumpSettings.jumping == true)
@@ -299,5 +286,22 @@ public class PlayerMovement : MonoBehaviour
 
             Gizmos.DrawWireSphere(transform.position + physSettings.rightWallCheckPosition, physSettings.wallcheckRadius);
         }
+    }
+    public void StartJump()
+    {
+        jumpSettings.jumpMoment = Time.time;
+        jumpSettings.jumpSpeed = 0;
+        jumpSettings.reachedMax = false;
+        jumpSettings.minReached = false;
+        jumpParticle.Stop();
+        jumpParticle.Play();
+        groundedPlayer = false;
+        jumpSettings.jumping = true;
+        jumpSettings.startingHieght = transform.position.y;
+        jumpSettings.minTarget = jumpSettings.startingHieght + jumpSettings.minJumpHieght;
+        jumpSettings.maxTarget = jumpSettings.startingHieght + jumpSettings.maxJumpHeight;
+        jumpSettings.jumpSpeed = Mathf.Lerp(jumpSettings.jumpSpeed, jumpSettings.upMax, jumpSettings.upRate);
+        playerVelocity.y = 0f;
+        playerVelocity.y += jumpSettings.jumpSpeed;
     }
 }
