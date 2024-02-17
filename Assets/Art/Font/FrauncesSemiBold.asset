@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
   m_Name: FrauncesSemiBold
   m_EditorClassIdentifier: 
-  hashCode: 0
+  hashCode: 2013468780
   material: {fileID: 4615622286775110079}
-  materialHashCode: 0
+  materialHashCode: 2106946124
   m_Version: 1.1.0
   m_SourceFontFileGUID: 896a068befdb3494ca7c4656db511756
   m_SourceFontFile_EditorRef: {fileID: 12800000, guid: 896a068befdb3494ca7c4656db511756, type: 3}
@@ -2617,9 +2617,9 @@ Material:
     - _OutlineWidth: 0
     - _PerspectiveFilter: 0.875
     - _Reflectivity: 10
-    - _ScaleRatioA: 1
-    - _ScaleRatioB: 1
-    - _ScaleRatioC: 1
+    - _ScaleRatioA: 0.8333333
+    - _ScaleRatioB: 0.6770833
+    - _ScaleRatioC: 0.6770833
     - _ScaleX: 1
     - _ScaleY: 1
     - _ShaderFlags: 0
