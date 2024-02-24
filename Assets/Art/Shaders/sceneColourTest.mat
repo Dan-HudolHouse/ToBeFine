@@ -42,13 +42,13 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Blend: 0.046
+    - _Blend: 0.029
     - _Float: 0
-    - _Opacity: 0.88
+    - _Opacity: 1.05
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
-    - _Tiling: {r: 0.03, g: -8.03, b: 0, a: 0}
+    - _Tiling: {r: 0.03, g: 0.07, b: 0, a: 0}
     - _Vector2: {r: 0.03, g: 0.05, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &2703785496615552247
