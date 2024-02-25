@@ -32,7 +32,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d7fd9488000d3734a9e00ee676215985, type: 3}
-  m_Name: Global Volume Profile
+  m_Name: Global Volume Profile MainMenu
   m_EditorClassIdentifier: 
   components:
   - {fileID: 8089651394008953205}
@@ -108,10 +108,10 @@ MonoBehaviour:
   active: 1
   threshold:
     m_OverrideState: 1
-    m_Value: 0.65
+    m_Value: 0.6
   intensity:
     m_OverrideState: 1
-    m_Value: 1.3
+    m_Value: 0.24
   scatter:
     m_OverrideState: 0
     m_Value: 0.016
@@ -129,11 +129,11 @@ MonoBehaviour:
     m_Value: 1
   dirtTexture:
     m_OverrideState: 1
-    m_Value: {fileID: 2800000, guid: 80561e6ab952c4d1988d06709f841cbc, type: 3}
+    m_Value: {fileID: 2800000, guid: bae91de18894946c4ba232a2eb9a6c91, type: 3}
     dimension: 1
   dirtIntensity:
     m_OverrideState: 1
-    m_Value: 1.5
+    m_Value: 13.2
 --- !u!114 &9053839525146139378
 MonoBehaviour:
   m_ObjectHideFlags: 3

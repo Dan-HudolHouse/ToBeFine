@@ -44,7 +44,7 @@ Material:
     m_Floats:
     - _Blend: 0.128
     - _Float: 0
-    - _Opacity: 0.21
+    - _Opacity: 0.01
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
