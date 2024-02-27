@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: New Material
+  m_Name: FirstLevelSky
   m_Shader: {fileID: -6465566751694194690, guid: cc4da8e23cb3ff946b0994420b28345d, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
